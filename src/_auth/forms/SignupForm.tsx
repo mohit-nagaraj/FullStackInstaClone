@@ -15,15 +15,24 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { SignupValidation } from '@/lib/validation'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useToast } from '@/components/ui/use-toast'
-import { useCreateUserAccount } from '@/lib/react-query/queriesAndMutations'
+import {
+  useCreateUserAccount,
+  useSignInAccount,
+} from '@/lib/react-query/queries'
+import { useUserContext } from '@/context/AuthContext'
 
 const SignupForm = () => {
   const { toast } = useToast()
+  const { checkAuthUser, isLoading: isUserLoading } = useUserContext()
+  const navigate = useNavigate()
 
-  const { mutateAsync: createUserAccount, isLoading: isCreatingUser } =
+  const { mutateAsync: createUserAccount, isPending: isCreatingUser } =
     useCreateUserAccount()
+
+  const { mutateAsync: signInAccount, isPending: isSigningInUser } =
+    useSignInAccount()
   // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
@@ -44,7 +53,27 @@ const SignupForm = () => {
         description: 'There was some problem creating your account',
       })
 
-    // const sess
+    const session = await signInAccount({
+      email: values.email,
+      password: values.password,
+    })
+
+    if (!session)
+      return toast({
+        title: 'Error',
+        description: 'There was some problem signing in',
+      })
+
+    const isLoggedIn = await checkAuthUser()
+    if (isLoggedIn) {
+      form.reset()
+      navigate('/')
+    } else {
+      return toast({
+        title: 'Error',
+        description: 'There was some problem signing in',
+      })
+    }
   }
 
   return (
@@ -131,7 +160,10 @@ const SignupForm = () => {
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Already have an account?
-            <Link to="/login" className="text-primary-500 text-small semibold">
+            <Link
+              to="/sign-in"
+              className="text-primary-500 text-small semibold"
+            >
               {' '}
               Login
             </Link>
