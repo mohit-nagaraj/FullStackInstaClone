@@ -2,6 +2,7 @@ import {
   useQuery,
   useMutation,
   useQueryClient,
+  //eslint-disable-next-line
   useInfiniteQuery,
 } from '@tanstack/react-query'
 
@@ -21,6 +22,7 @@ import {
   getUserById,
   updateUser,
   getRecentPosts,
+  //eslint-disable-next-line
   getInfinitePosts,
   searchPosts,
   savePost,

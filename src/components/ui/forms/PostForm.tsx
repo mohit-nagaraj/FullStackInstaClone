@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
 import {
   Form,
   FormControl,
@@ -41,9 +40,9 @@ const PostForm = ({ post, action }: PostFormProps) => {
   })
 
   // Query
-  const { mutateAsync: createPost, isLoading: isLoadingCreate } =
+  const { mutateAsync: createPost, isPending: isLoadingCreate } =
     useCreatePost()
-  const { mutateAsync: updatePost, isLoading: isLoadingUpdate } =
+  const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
     useUpdatePost()
 
   // Handler
@@ -61,6 +60,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
         toast({
           title: `${action} post failed. Please try again.`,
         })
+        return
       }
       return navigate(`/posts/${post.$id}`)
     }
@@ -75,6 +75,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
       toast({
         title: `${action} post failed. Please try again.`,
       })
+      return
     }
     navigate('/')
   }
@@ -92,10 +93,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             <FormItem>
               <FormLabel className="shad-form_label">Caption</FormLabel>
               <FormControl>
-                <Textarea
-                  className="shad-textarea custom-scrollbar"
-                  {...field}
-                />
+                <Input type="text" className="shad-input" {...field} />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>

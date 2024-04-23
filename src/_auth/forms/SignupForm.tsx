@@ -1,4 +1,3 @@
-import React from 'react'
 import Loader from '@/components/ui/shared/loader'
 import { Button } from '@/components/ui/button'
 import {
@@ -57,7 +56,12 @@ const SignupForm = () => {
       email: values.email,
       password: values.password,
     })
-
+    if (isSigningInUser) {
+      console.log('Signing in user...')
+    }
+    if (isUserLoading) {
+      console.log('User is loading...')
+    }
     if (!session)
       return toast({
         title: 'Error',

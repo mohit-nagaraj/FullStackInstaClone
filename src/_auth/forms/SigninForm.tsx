@@ -1,4 +1,3 @@
-import React from 'react'
 import Loader from '@/components/ui/shared/loader'
 import { Button } from '@/components/ui/button'
 import {
@@ -37,6 +36,8 @@ const SigninForm = () => {
 
   // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof SigninValidation>) {
+    if (isSigningInUser) console.log('Signing in user...')
+
     const session = await signInAccount({
       email: values.email,
       password: values.password,

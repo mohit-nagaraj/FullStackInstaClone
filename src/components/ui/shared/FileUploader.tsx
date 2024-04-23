@@ -32,23 +32,33 @@ const FileUploader = ({ fieldChange, mediaUrl }: FileUploaderProps) => {
   return (
     <div
       {...getRootProps()}
-      className="flex flex-center flex-col bg-dark-3 rounded-xl cursor-pointer"
+      className="flex flex-center flex-col bg-dark-3 rounded-xl cursor-pointer p-12"
     >
       <input {...getInputProps()} className="cursor-pointer" />
 
       {fileUrl ? (
         <>
-          <div className="flex flex-1 justify-center w-full p-5 lg:p-10">
-            <img src={fileUrl} alt="image" className="file_uploader-img" />
+          <div className="flex flex-1 justify-center w-full p-5">
+            <img
+              style={{
+                objectFit: 'cover',
+                maxHeight: '150px',
+              }}
+              src={fileUrl}
+              alt="image"
+              className="file_uploader-img"
+            />
           </div>
           <p className="file_uploader-label">Click or drag photo to replace</p>
         </>
       ) : (
-        <div className="file_uploader-box ">
+        <div
+          className="file_uploader-box flex-center flex-col gap-2"
+          style={{ height: '200px' }}
+        >
           <img
             src="/assets/icons/file-upload.svg"
-            width={96}
-            height={77}
+            width={50}
             alt="file upload"
           />
 

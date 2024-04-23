@@ -2,9 +2,12 @@ import PostForm from '@/components/ui/forms/PostForm'
 
 const CreatePost = () => {
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="common-container p-4">
-        <div className="max-w-5xl flex-start g-3 justify-start w-full">
+    <div
+      className="flex flex-1 flex-col align-center"
+      style={{ overflow: 'auto' }}
+    >
+      <div className="common-container-create-post p-4">
+        <div className="max-w-5xl flex-start g-3 justify-start w-full mb-10 mt-5">
           <img
             src="/assets/icons/add-post.svg"
             width={36}
