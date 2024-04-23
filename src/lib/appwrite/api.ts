@@ -212,7 +212,7 @@ export async function searchPosts(searchTerm: string) {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       [Query.search('caption', searchTerm)]
     )
 
@@ -235,7 +235,7 @@ export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       queries
     )
 
@@ -254,7 +254,7 @@ export async function getPostById(postId?: string) {
   try {
     const post = await databases.getDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       postId
     )
 
@@ -297,7 +297,7 @@ export async function updatePost(post: IUpdatePost) {
     //  Update post
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       post.postId,
       {
         caption: post.caption,
@@ -337,7 +337,7 @@ export async function deletePost(postId?: string, imageId?: string) {
   try {
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       postId
     )
 
@@ -356,7 +356,7 @@ export async function likePost(postId: string, likesArray: string[]) {
   try {
     const updatedPost = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       postId,
       {
         likes: likesArray,
@@ -376,7 +376,7 @@ export async function savePost(userId: string, postId: string) {
   try {
     const updatedPost = await databases.createDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.savesCollectionId,
+      '660f8b6649eef180bade',
       ID.unique(),
       {
         user: userId,
@@ -396,7 +396,7 @@ export async function deleteSavedPost(savedRecordId: string) {
   try {
     const statusCode = await databases.deleteDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.savesCollectionId,
+      '660f8b6649eef180bade',
       savedRecordId
     )
 
@@ -415,7 +415,7 @@ export async function getUserPosts(userId?: string) {
   try {
     const post = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       [Query.equal('creator', userId), Query.orderDesc('$createdAt')]
     )
 
@@ -432,7 +432,7 @@ export async function getRecentPosts() {
   try {
     const posts = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.postCollectionId,
+      '660f8ae34a06abb06b74',
       [Query.orderDesc('$createdAt'), Query.limit(20)]
     )
 
@@ -460,7 +460,7 @@ export async function getUsers(limit?: number) {
   try {
     const users = await databases.listDocuments(
       appwriteConfig.databaseId,
-      appwriteConfig.userCollectionId,
+      '660f8b31cfecd76a12ed',
       queries
     )
 
@@ -516,7 +516,7 @@ export async function updateUser(user: IUpdateUser) {
     //  Update user
     const updatedUser = await databases.updateDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.userCollectionId,
+      '660f8b31cfecd76a12ed',
       user.userId,
       {
         name: user.name,
