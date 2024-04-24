@@ -76,6 +76,7 @@ const PostCard = ({ post }: PostCardProps) => {
           height={400}
           width={400}
           className="post-card_img rounded-lg mb-4"
+          style={{ height: '400px', width: '400px', objectFit: 'cover' }}
         />
       </Link>
 
