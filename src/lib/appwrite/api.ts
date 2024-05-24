@@ -477,7 +477,7 @@ export async function getUserById(userId: string) {
   try {
     const user = await databases.getDocument(
       appwriteConfig.databaseId,
-      appwriteConfig.userCollectionId,
+      '660f8b31cfecd76a12ed',
       userId
     )
 

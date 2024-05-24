@@ -614,6 +614,12 @@ body {
     height: 3rem;
   }
 }
+.w-28 {
+  width: 7rem;
+}
+.h-28 {
+  height: 7rem;
+}
 /* 'primary-500': '#877EFF',
         'primary-600': '#5D5FEF',
         'secondary-500': '#FFB620',
